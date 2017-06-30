@@ -34,6 +34,9 @@
 		</Compiler>
 		<Unit filename="classHash.cpp" />
 		<Unit filename="classHash.h" />
+		<Unit filename="classWord.cpp" />
+		<Unit filename="classWord.h" />
+		<Unit filename="imports.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
