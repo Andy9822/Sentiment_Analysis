@@ -1,6 +1,7 @@
 #ifndef CLASSHASH_H_INCLUDED
 #define CLASSHASH_H_INCLUDED
 
+#include "imports.h"
 class HashTable{
     private:
         int tamanho;
