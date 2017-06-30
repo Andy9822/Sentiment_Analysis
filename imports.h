@@ -3,5 +3,6 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 #endif // IMPORTS_H_INCLUDED

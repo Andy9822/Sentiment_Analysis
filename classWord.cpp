@@ -1,4 +1,4 @@
-#include "classWord.h"
+#include "classHash.h"
 
 Word::Word(){
         palavra = "";
@@ -25,8 +25,20 @@ void Word::updateWord(float value){
 
 }
 
-void Word::addWord(std::string pal, float value){
+bool Word::isEmpty(){
+
+    if(palavra.compare("") == 0){
+        return 1;
+    }
+
+    else{
+        return 0;
+    }
+
+}
+
+void Word::addWord(std::string pal, float value,int ocurrences){
     palavra = pal;
-    ocorrencias = 1;
+    ocorrencias = ocurrences;
     valor = value;
 }

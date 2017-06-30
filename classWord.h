@@ -16,7 +16,8 @@ class Word{
         float getValor();
         void updateWord(float value);
         std::string getString();
-        void addWord(std::string pal,float value);
+        void addWord(std::string pal,float value,int ocurrences);
+        bool isEmpty();
 };
 
 

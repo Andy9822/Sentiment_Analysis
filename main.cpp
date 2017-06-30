@@ -1,27 +1,25 @@
 #include "classHash.h"
-#include "classWord.h"
-#include "imports.h"
+
 using namespace std;
 
 int main()
 {
     HashTable tabela(5);
 
-    cout << "tamanho eh " <<tabela.getTam() << endl;
+    cout << "Tamanho da Tabela Hash = " <<tabela.getTam() << endl ;
+    tabela.insertWord("Andy",4);
+    tabela.insertWord("Andy",2);
+    tabela.insertWord("Leo",1);
+    tabela.insertWord("Bravo",1);
+    tabela.insertWord("Bravo",10);
+    cout << "Numero de palavras = " << tabela.getItens() << endl << endl;
 
+    cout << "Valor de Andy = " << tabela.valueWord("Andy") << endl;
+    cout << "Valor de Leo = " << tabela.valueWord("Leo") << endl;
+    cout << "Valor de Bravo = " << tabela.valueWord("Bravo") << endl;
+    cout << endl;
+    tabela.showNames();
 
-    if (tabela.setItens(4))
-        cout << "numero elementos " <<tabela.getItens() << endl << endl;
-
-
-    Word boa;
-    cout <<"Ocorrencias: " << boa.getOcorrencias() << endl << "Valor: " << boa.getValor() << endl << "len string: " << boa.getString().length() << endl << endl;
-
-    boa.addWord("Cry",2);
-    boa.updateWord(5);
-    boa.updateWord(1);
-    boa.updateWord(2);
-    cout <<"Ocorrencias: " << boa.getOcorrencias() << endl << "Valor: " << boa.getValor() << endl << "Palavra: " << boa.getString() << endl;
 
 
 
