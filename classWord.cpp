@@ -42,3 +42,22 @@ void Word::addWord(std::string pal, float value,int ocurrences){
     ocorrencias = ocurrences;
     valor = value;
 }
+
+bool Word::radixWord(std::string radical){
+
+    if (radical.size() > palavra.size()){
+
+        return false;
+    }
+
+    for(int i = 0; i < ((int) (radical.size())) ; i++){
+
+        if( radical[i] != palavra[i] ){
+
+            return false;
+        }
+
+    }
+
+    return true;
+}
