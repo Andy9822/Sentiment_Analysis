@@ -25,7 +25,7 @@ class HashTable{
         int getTam();
         int getItens();
         int setItens(int itens);
-        ~HashTable(void);
+        //~HashTable(void);
 };
 
 #endif // CLASSHASH_H_INCLUDED

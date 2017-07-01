@@ -18,7 +18,8 @@ class Word{
         std::string getString();
         void addWord(std::string pal,float value,int ocurrences);
         bool isEmpty();
-        bool radixWord(std::string radical);
+        bool isRadixWord(std::string radical);
+        bool sameString(std::string palavra);
 };
 
 
