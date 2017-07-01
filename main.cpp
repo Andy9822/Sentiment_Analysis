@@ -6,10 +6,35 @@ int main()
 {
 
     HashTable tabela(24);
-    tabela = inputToHashTable(tabela);
+    //tabela = inputToHashTable(tabela);
 
 
     cout << "Tamanho da Tabela Hash = " <<tabela.getTam() << endl ;
+    /*tabela.insertWord("Andy",2);
+    tabela.insertWord("Bravo",1);
+    tabela.insertWord("Leo",3);*/
+
+
+    vector<string> lineWords;
+    string line;
+    ifstream myfile ("input.txt");
+
+    if (! myfile.is_open())
+    {
+        cout << "Unable to open file";
+        exit(EXIT_FAILURE);
+    }
+
+    while ( getline (myfile,line) )
+    {
+        lineWords = splitStr(line); /// Separa em um vector cada palavra da linha
+        for(int i = 1; i < (int) lineWords.size(); i++)
+        {
+            tabela.insertWord(lineWords[i],(float) atof(lineWords[0].c_str())); /// Insere palavra por palavra do vector na Tabela Hash
+        }
+    }
+    myfile.close();
+
     tabela.showNames();
     cout << "Numero de palavras = " << tabela.getItens() << endl << endl;
 

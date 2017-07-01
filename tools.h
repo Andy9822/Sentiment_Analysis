@@ -3,7 +3,6 @@
 
 #include "classHash.h"
 
-HashTable inputToHashTable(HashTable tabela);
 
 std::vector<std::string> splitStr(std::string str);
 

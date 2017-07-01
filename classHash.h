@@ -6,26 +6,25 @@ class HashTable{
     private:
         int tamanho;
         int numItens;
-        std::vector<Word> myWords;
+        std::vector<Word*> myWords;
 
 
     private:
         int valorString(std::string str);
         int chaveDivisao(int chave, int tamTabela);
-        void updateWord(std::string palavra,int position,float value,int ocurrences);
         int sondagemLinear(int pos,int i, int tamTabela);
-        void newWord(Word *emptyWord,std::string palavra, float value,int ocurrences);
-        Word * getWord(std::string palavra,int position);
+        Word ** getWord(std::string palavra,int position);
+        void updateWord(std::string palavra,int position,float value,int ocurrences);
 
     public:
-        float valueWord(std::string palavra);
-        void insertWord(std::string nome,float value);
-        void showNames();
         HashTable(int Tam);
         int getTam();
         int getItens();
         int setItens(int itens);
-        //~HashTable(void);
+        void insertWord(std::string nome,float value);
+        float valueWord(std::string palavra);
+        void showNames();
+        ~HashTable(void);
 };
 
 #endif // CLASSHASH_H_INCLUDED
