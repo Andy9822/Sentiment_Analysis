@@ -41,7 +41,7 @@ int main()
     string phrase;
     std::getline(std::cin, phrase);
 
-    std::cout << phraseNote(phrase, tabela);
+    std::cout << phraseNote(phrase, &tabela);
 
     return EXIT_SUCCESS;
 }

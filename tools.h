@@ -5,6 +5,6 @@
 
 
 std::vector<std::string> splitStr(std::string str);
-float phraseNote(std::string phrase, HashTable tabela);
+float phraseNote(std::string phrase, HashTable * tabela);
 
 #endif // TOOLS_H_INCLUDED
