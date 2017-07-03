@@ -38,7 +38,10 @@ int main()
     tabela.showNames();
     cout << "Numero de palavras = " << tabela.getItens() << endl << endl;
 
+    string phrase;
+    std::getline(std::cin, phrase);
 
+    std::cout << phraseNote(phrase, tabela);
 
     return EXIT_SUCCESS;
 }
