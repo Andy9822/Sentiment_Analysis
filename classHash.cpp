@@ -105,10 +105,13 @@ void HashTable::insertWord(std::string nome,float value)  ///Atualizará ou criar
 
 float HashTable::valueWord(std::string palavra)  ///Retorna o valor do Objeto Word correspondente à string passada
 {
-
     Word ** ptWord = getWord(palavra,chaveDivisao(valorString(palavra),getTam()));
-    float valor = (*ptWord)->getValor();
-    return valor;
+    if (*ptWord == NULL)
+        return 2;
+    else {
+        float valor = (*ptWord)->getValor();
+        return valor;
+    }
 }
 
 void HashTable::showNames()  ///Método que mostra toda a tabela Hash
@@ -140,7 +143,7 @@ HashTable::~HashTable(void)
         if (myWords[i] != NULL)
         {
             delete myWords[i];
-            std::cout <<i+1 << "a posicao dealocada \n";
+            std::cout <<i+1 << "a posicao desalocada \n";
 
         }
         else
