@@ -4,20 +4,12 @@ using namespace std;
 
 int main()
 {
+    vector<string> lineWords;
+    string line, phrase;
+    ifstream myfile ("input.txt");
 
     HashTable tabela(24);
-    //tabela = inputToHashTable(tabela);
-
-
     cout << "Tamanho da Tabela Hash = " <<tabela.getTam() << endl ;
-    /*tabela.insertWord("Andy",2);
-    tabela.insertWord("Bravo",1);
-    tabela.insertWord("Leo",3);*/
-
-
-    vector<string> lineWords;
-    string line;
-    ifstream myfile ("input.txt");
 
     if (! myfile.is_open())
     {
@@ -33,14 +25,12 @@ int main()
             tabela.insertWord(lineWords[i],(float) atof(lineWords[0].c_str())); /// Insere palavra por palavra do vector na Tabela Hash
         }
     }
+
     myfile.close();
-
     tabela.showNames();
+
     cout << "Numero de palavras = " << tabela.getItens() << endl << endl;
-
-    string phrase;
     std::getline(std::cin, phrase);
-
     std::cout << phraseNote(phrase, &tabela);
 
     return EXIT_SUCCESS;
