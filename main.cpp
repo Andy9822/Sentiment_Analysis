@@ -30,9 +30,11 @@ int main()
     tabela.showNames();
 
     cout << "Numero de palavras = " << tabela.getItens() << endl << endl;
-    std::getline(std::cin, phrase);
-    std::cout << phraseNote(phrase, &tabela);
-
+    //std::getline(std::cin, phrase);
+    //std::cout << phraseNote(phrase, &tabela);
+    cout << "Palavras mais Positivas" << endl << endl;
+    nPositives(8, &tabela);
+    cout << endl;
     return EXIT_SUCCESS;
 }
 
