@@ -19,6 +19,11 @@ int HashTable::getItens()
     return numItens;
 }
 
+std::vector<Word*> HashTable::getRealItems()
+{
+    return myWords;
+}
+
 int HashTable::setItens(int itens)
 {
     if (itens <= tamanho)
@@ -42,18 +47,18 @@ int HashTable::valorString(std::string str) ///Retorna um valor associado a uma 
     return valor;
 }
 
-int HashTable::chaveDivisao(int chave, int tamTabela) ///Retorna um valor associado à chave passada
+int HashTable::chaveDivisao(int chave, int tamTabela) ///Retorna um valor associado ï¿½ chave passada
 {
     return (chave & 0x7FFFFFFF) % tamTabela;
 }
 
-int HashTable::sondagemLinear(int pos,int i, int tamTabela)  ///Se há colisão, procura pelo elemento nas próximas posições da Tabela Hash
+int HashTable::sondagemLinear(int pos,int i, int tamTabela)  ///Se hï¿½ colisï¿½o, procura pelo elemento nas prï¿½ximas posiï¿½ï¿½es da Tabela Hash
 {
 
     return ( ((pos + i) & 0x7FFFFFFF) % tamTabela );
 }
 
-Word ** HashTable::getWord(std::string palavra,int position)  ///Retorna o Objeto Word correspondente à string passada
+Word ** HashTable::getWord(std::string palavra,int position)  ///Retorna o Objeto Word correspondente ï¿½ string passada
 {
 
     int newPos;
@@ -79,7 +84,7 @@ Word ** HashTable::getWord(std::string palavra,int position)  ///Retorna o Objet
     return ptWord;
 }
 
-void HashTable::updateWord(std::string str,int position,float value,int ocurrences)  ///Atualiza o Objeto Word correspondente à string
+void HashTable::updateWord(std::string str,int position,float value,int ocurrences)  ///Atualiza o Objeto Word correspondente ï¿½ string
 {
 
     Word ** palavra = getWord(str,position);
@@ -97,13 +102,13 @@ void HashTable::updateWord(std::string str,int position,float value,int ocurrenc
     palavra = NULL;
 }
 
-void HashTable::insertWord(std::string nome,float value)  ///Atualizará ou criará um Objeto Word com a string e valor passados
+void HashTable::insertWord(std::string nome,float value)  ///Atualizarï¿½ ou criarï¿½ um Objeto Word com a string e valor passados
 {
     int position = chaveDivisao(valorString(nome),getTam());
     updateWord(nome,position,value,1);
 }
 
-float HashTable::valueWord(std::string palavra)  ///Retorna o valor do Objeto Word correspondente à string passada
+float HashTable::valueWord(std::string palavra)  ///Retorna o valor do Objeto Word correspondente ï¿½ string passada
 {
     Word ** ptWord = getWord(palavra,chaveDivisao(valorString(palavra),getTam()));
     if (*ptWord == NULL)
@@ -114,7 +119,7 @@ float HashTable::valueWord(std::string palavra)  ///Retorna o valor do Objeto Wo
     }
 }
 
-void HashTable::showNames()  ///Método que mostra toda a tabela Hash
+void HashTable::showNames()  ///Mï¿½todo que mostra toda a tabela Hash
 {
 
     for(int i = 0; i < getTam(); i++)
@@ -153,4 +158,3 @@ HashTable::~HashTable(void)
     std::cout << std::endl<< "Vector ... deleted" << std::endl;
     myWords.clear();
 }
-

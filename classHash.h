@@ -23,6 +23,7 @@ class HashTable{
         int setItens(int itens);
         void insertWord(std::string nome,float value);
         float valueWord(std::string palavra);
+        std::vector<Word*> getRealItems();
         void showNames();
         ~HashTable(void);
 };
