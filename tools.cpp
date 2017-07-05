@@ -39,7 +39,7 @@ void nPositives(int n, HashTable * tabela)
             nPosReturn.push_back(nPos[j]);
         }
         else {
-            for (int i = 0; i < nPosReturn.size(); i ++)
+            for (int i = 0; i < (int) nPosReturn.size(); i ++)
             {
                 if (nPos[j] != NULL)
                 {
@@ -55,6 +55,64 @@ void nPositives(int n, HashTable * tabela)
     for(int k = 0; k < nPosReturn.size(); k++)
     {
         cout << nPosReturn[k]->getValor() << "  " << nPosReturn[k]->getString() << endl;
+    }
+}
+
+void nNegatives(int n, HashTable * tabela)
+{
+    vector<Word*> nPos = tabela->getRealItems();
+    vector<Word*> nPosReturn;
+    for(int j = 0; j < nPos.size(); j ++)
+    {
+        if (nPos[j] != NULL && nPosReturn.size() < n) {
+            nPosReturn.push_back(nPos[j]);
+        }
+        else {
+            for (int i = 0; i < (int) nPosReturn.size(); i ++)
+            {
+                if (nPos[j] != NULL)
+                {
+                    if (nPosReturn[i]->getValor() > nPos[j]->getValor() && !alreadyInside(nPosReturn, *nPos[j]))
+                    {
+                        nPosReturn.erase (nPosReturn.begin()+i);
+                        nPosReturn.push_back(nPos[j]);
+                    }
+                }
+            }
+        }
+    }
+    for(int k = 0; k < nPosReturn.size(); k++)
+    {
+        cout << nPosReturn[k]->getValor() << "  " << nPosReturn[k]->getString() << endl;
+    }
+}
+
+void nFrequency(int n, HashTable * tabela)
+{
+    vector<Word*> nPos = tabela->getRealItems();
+    vector<Word*> nPosReturn;
+    for(int j = 0; j < nPos.size(); j ++)
+    {
+        if (nPos[j] != NULL && nPosReturn.size() < n) {
+            nPosReturn.push_back(nPos[j]);
+        }
+        else {
+            for (int i = 0; i < (int) nPosReturn.size(); i ++)
+            {
+                if (nPos[j] != NULL)
+                {
+                    if (nPosReturn[i]->getOcorrencias() < nPos[j]->getOcorrencias() && !alreadyInside(nPosReturn, *nPos[j]))
+                    {
+                        nPosReturn.erase (nPosReturn.begin()+i);
+                        nPosReturn.push_back(nPos[j]);
+                    }
+                }
+            }
+        }
+    }
+    for(int k = 0; k < nPosReturn.size(); k++)
+    {
+        cout << nPosReturn[k]->getString() << " :: Ocorrencias:" << nPosReturn[k]->getOcorrencias() << endl ;
     }
 }
 

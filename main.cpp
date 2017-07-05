@@ -8,7 +8,7 @@ int main()
     string line, phrase;
     ifstream myfile ("input.txt");
 
-    HashTable tabela(24);
+    HashTable tabela(22);
     cout << "Tamanho da Tabela Hash = " <<tabela.getTam() << endl ;
 
     if (! myfile.is_open())
@@ -33,7 +33,9 @@ int main()
     //std::getline(std::cin, phrase);
     //std::cout << phraseNote(phrase, &tabela);
     cout << "Palavras mais Positivas" << endl << endl;
-    nPositives(8, &tabela);
+    //nPositives(8, &tabela);
+    //nNegatives(8, &tabela);
+    //nFrequency(8, &tabela);
     cout << endl;
     return EXIT_SUCCESS;
 }
