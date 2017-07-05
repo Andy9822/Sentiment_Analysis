@@ -20,7 +20,7 @@ int main()
     while ( getline (myfile,line) )
     {
         lineWords = splitStr(line); /// Separa em um vector cada palavra da linha
-        for(int i = 1; i < (int) lineWords.size(); i++)
+        for(int i = 1; i < (int) lineWords.size() -1; i++)
         {
             tabela.insertWord(lineWords[i],(float) atof(lineWords[0].c_str())); /// Insere palavra por palavra do vector na Tabela Hash
         }
