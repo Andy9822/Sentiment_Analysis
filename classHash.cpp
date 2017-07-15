@@ -91,12 +91,9 @@ Word * HashTable::getRealWord(std::string palavra) {
 
 void HashTable::updateWord(std::string str,int position,float value,int ocurrences, int linha)  ///Atualiza o Objeto Word correspondente � string
 {
-
     Word ** palavra = getWord(str,position);
-
     if( (*palavra) != NULL)
     {
-
         (*palavra)->updateWord(value, linha);
     }
     else
@@ -158,7 +155,7 @@ HashTable::~HashTable(void)
         if (myWords[i] != NULL)
         {
             delete myWords[i];
-            //std::cout <<i+1 << "a posicao desalocada \n";
+            std::cout <<i+1 << "a posicao desalocada \n";
 
         }
         else

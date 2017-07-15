@@ -27,7 +27,6 @@ std::string Word::getString(){
 
 ///Methods
 void Word::updateWord(float value, int linha){ ///Recebe um novo valor para a palavra e recalcula o seu valor total fazendo uma média
-
     this->valor = ((this->ocorrencias * this->valor) + value) / (this->ocorrencias + 1 );
     this->ocorrencias += 1;
     if (!(std::find(this->linhas.begin(), this->linhas.end(), linha) != this->linhas.end())) /// Insere as linhas dos comentários que a palavra está no documento
