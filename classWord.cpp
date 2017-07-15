@@ -1,9 +1,11 @@
 #include "classHash.h"
+#include <algorithm>
 
-Word::Word(std::string str, int ocurrences, float value){
+Word::Word(std::string str, int ocurrences, float value, int linha){
         this->palavra = str;
         this->ocorrencias = ocurrences;
         this->valor = value;
+        this->linhas.push_back(linha);
 }
 
 ///Getters & Setters
@@ -15,15 +17,21 @@ float Word::getValor(){
     return this->valor;
 }
 
+std::vector<int> Word::getLinhas(){
+    return this->linhas;
+}
+
 std::string Word::getString(){
     return this->palavra;
 }
 
 ///Methods
-void Word::updateWord(float value){ ///Recebe um novo valor para a palavra e recalcula o seu valor total fazendo uma média
+void Word::updateWord(float value, int linha){ ///Recebe um novo valor para a palavra e recalcula o seu valor total fazendo uma média
 
     this->valor = ((this->ocorrencias * this->valor) + value) / (this->ocorrencias + 1 );
     this->ocorrencias += 1;
+    if (!(std::find(this->linhas.begin(), this->linhas.end(), linha) != this->linhas.end())) /// Insere as linhas dos comentários que a palavra está no documento
+        this->linhas.push_back(linha);
 
 }
 
