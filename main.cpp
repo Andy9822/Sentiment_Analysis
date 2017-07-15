@@ -5,8 +5,10 @@ using namespace std;
 int main()
 {
     vector<string> lineWords;
+    vector<string> fileContent;
     string line, phrase;
     ifstream myfile ("input.txt");
+    int index=0;
 
     HashTable tabela(22);
     cout << "Tamanho da Tabela Hash = " <<tabela.getTam() << endl ;
@@ -19,12 +21,16 @@ int main()
 
     while ( getline (myfile,line) )
     {
+        fileContent.push_back(line);
         lineWords = splitStr(line); /// Separa em um vector cada palavra da linha
         for(int i = 1; i < (int) lineWords.size() -1; i++)
         {
-            tabela.insertWord(lineWords[i],(float) atof(lineWords[0].c_str())); /// Insere palavra por palavra do vector na Tabela Hash
+            tabela.insertWord(lineWords[i],(float) atof(lineWords[0].c_str()), index); /// Insere palavra por palavra do vector na Tabela Hash
         }
+        index++;
     }
+    for(std::vector<string> :: iterator it = fileContent.begin(); it != fileContent.end(); ++it)
+        cout << *it <<endl;
 
     myfile.close();
     tabela.showNames();
@@ -36,6 +42,7 @@ int main()
     //nPositives(8, &tabela);
     //nNegatives(8, &tabela);
     //nFrequency(8, &tabela);
+    searchComments("a", &tabela, 2, fileContent);
     cout << endl;
     return EXIT_SUCCESS;
 }

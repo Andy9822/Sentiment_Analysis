@@ -84,7 +84,12 @@ Word ** HashTable::getWord(std::string palavra,int position)  ///Retorna o Objet
     return ptWord;
 }
 
-void HashTable::updateWord(std::string str,int position,float value,int ocurrences)  ///Atualiza o Objeto Word correspondente � string
+Word * HashTable::getRealWord(std::string palavra) {
+    int position = chaveDivisao(valorString(palavra),getTam());
+    return *(getWord(palavra, position));
+}
+
+void HashTable::updateWord(std::string str,int position,float value,int ocurrences, int linha)  ///Atualiza o Objeto Word correspondente � string
 {
 
     Word ** palavra = getWord(str,position);
@@ -92,20 +97,20 @@ void HashTable::updateWord(std::string str,int position,float value,int ocurrenc
     if( (*palavra) != NULL)
     {
 
-        (*palavra)->updateWord(value);
+        (*palavra)->updateWord(value, linha);
     }
     else
     {
-        (*palavra) = new Word(str,ocurrences,value);
+        (*palavra) = new Word(str,ocurrences,value, linha);
         setItens(getItens() +1);
     }
     palavra = NULL;
 }
 
-void HashTable::insertWord(std::string nome,float value)  ///Atualizar� ou criar� um Objeto Word com a string e valor passados
+void HashTable::insertWord(std::string nome,float value,int linha)  ///Atualizar� ou criar� um Objeto Word com a string e valor passados
 {
     int position = chaveDivisao(valorString(nome),getTam());
-    updateWord(nome,position,value,1);
+    updateWord(nome,position,value,1, linha);
 }
 
 float HashTable::valueWord(std::string palavra)  ///Retorna o valor do Objeto Word correspondente � string passada
@@ -129,6 +134,11 @@ void HashTable::showNames()  ///M�todo que mostra toda a tabela Hash
         {
 
             std::cout << "palavra  = " << myWords[i]->getString() <<"  valor = " << myWords[i]->getValor() <<"  ocorrencias = " << myWords[i]->getOcorrencias() << std::endl;
+            for(int j = 0; j < (int) myWords[i]->getLinhas().size(); j++)
+            {
+                std::cout << myWords[i]->getLinhas()[j] << " ";
+            }
+            std::cout << std::endl;
         }
         else
         {

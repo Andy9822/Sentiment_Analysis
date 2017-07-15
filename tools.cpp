@@ -1,4 +1,6 @@
 #include "tools.h"
+#include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -33,9 +35,9 @@ void nPositives(int n, HashTable * tabela)
 {
     vector<Word*> nPos = tabela->getRealItems();
     vector<Word*> nPosReturn;
-    for(int j = 0; j < nPos.size(); j ++)
+    for(int j = 0; j < (int) nPos.size(); j ++)
     {
-        if (nPos[j] != NULL && nPosReturn.size() < n) {
+        if (nPos[j] != NULL && (int) nPosReturn.size() < n) {
             nPosReturn.push_back(nPos[j]);
         }
         else {
@@ -52,7 +54,7 @@ void nPositives(int n, HashTable * tabela)
             }
         }
     }
-    for(int k = 0; k < nPosReturn.size(); k++)
+    for(int k = 0; k < (int) nPosReturn.size(); k++)
     {
         cout << nPosReturn[k]->getValor() << "  " << nPosReturn[k]->getString() << endl;
     }
@@ -62,9 +64,9 @@ void nNegatives(int n, HashTable * tabela)
 {
     vector<Word*> nPos = tabela->getRealItems();
     vector<Word*> nPosReturn;
-    for(int j = 0; j < nPos.size(); j ++)
+    for(int j = 0; j < (int) nPos.size(); j ++)
     {
-        if (nPos[j] != NULL && nPosReturn.size() < n) {
+        if (nPos[j] != NULL && (int) nPosReturn.size() < n) {
             nPosReturn.push_back(nPos[j]);
         }
         else {
@@ -81,7 +83,7 @@ void nNegatives(int n, HashTable * tabela)
             }
         }
     }
-    for(int k = 0; k < nPosReturn.size(); k++)
+    for(int k = 0; k < (int) nPosReturn.size(); k++)
     {
         cout << nPosReturn[k]->getValor() << "  " << nPosReturn[k]->getString() << endl;
     }
@@ -91,9 +93,9 @@ void nFrequency(int n, HashTable * tabela)
 {
     vector<Word*> nPos = tabela->getRealItems();
     vector<Word*> nPosReturn;
-    for(int j = 0; j < nPos.size(); j ++)
+    for(int j = 0; j < (int) nPos.size(); j ++)
     {
-        if (nPos[j] != NULL && nPosReturn.size() < n) {
+        if (nPos[j] != NULL && (int) nPosReturn.size() < n) {
             nPosReturn.push_back(nPos[j]);
         }
         else {
@@ -110,15 +112,36 @@ void nFrequency(int n, HashTable * tabela)
             }
         }
     }
-    for(int k = 0; k < nPosReturn.size(); k++)
+    for(int k = 0; k < (int) nPosReturn.size(); k++)
     {
         cout << nPosReturn[k]->getString() << " :: Ocorrencias:" << nPosReturn[k]->getOcorrencias() << endl ;
     }
 }
 
+void searchComments(string entrada, HashTable * tabela, int pontuacao, vector<string> fileContent)
+{
+    Word * palavra;
+    palavra = tabela->getRealWord(entrada);
+    vector<int> linhas = palavra->getLinhas();
+    vector<string> lineWords;
+    int valor;
+    for(std::vector<int>::iterator it = linhas.begin(); it != linhas.end(); ++it)
+    {
+        if (pontuacao < 6 && pontuacao >= 0)
+        {
+            lineWords = splitStr(fileContent[*it]);
+            istringstream  (lineWords[0]) >> valor;
+            if ((valor == pontuacao))
+                cout << fileContent[*it] << endl;
+        }
+        else
+            cout << fileContent[*it] << endl;
+    }
+}
+
 bool alreadyInside(vector<Word*> wordArray, Word word)
 {
-    for (int i = 0; i < wordArray.size(); i++)
+    for (int i = 0; i < (int) wordArray.size(); i++)
     {
         if(wordArray[i]->getValor() == word.getValor() && wordArray[i]->getString() == word.getString())
             return true;
