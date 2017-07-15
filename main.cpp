@@ -10,8 +10,9 @@ int main()
     ifstream myfile ("input.txt");
     int index=0;
 
-    HashTable tabela(22);
+    HashTable tabela(20000);
     cout << "Tamanho da Tabela Hash = " <<tabela.getTam() << endl ;
+
 
     if (! myfile.is_open())
     {
@@ -29,21 +30,75 @@ int main()
         }
         index++;
     }
-    for(std::vector<string> :: iterator it = fileContent.begin(); it != fileContent.end(); ++it)
-        cout << *it <<endl;
+    //for(std::vector<string> :: iterator it = fileContent.begin(); it != fileContent.end(); ++it)
+    //    cout << *it <<endl;
 
     myfile.close();
-    tabela.showNames();
+    //tabela.showNames();
 
-    cout << "Numero de palavras = " << tabela.getItens() << endl << endl;
+    //cout << "Numero de palavras = " << tabela.getItens() << endl << endl;
     //std::getline(std::cin, phrase);
     //std::cout << phraseNote(phrase, &tabela);
-    cout << "Palavras mais Positivas" << endl << endl;
+    //cout << "Palavras mais Positivas" << endl << endl;
     //nPositives(8, &tabela);
     //nNegatives(8, &tabela);
     //nFrequency(8, &tabela);
-    searchComments("a", &tabela, 2, fileContent);
+    //searchComments("a", &tabela, 2, fileContent);
+    int opt;
+    int k;
+    string palavra;
     cout << endl;
+    cout << "========= MENU ==========" << endl;
+    cout << "1 - Classificar novo comentario" << endl;
+    cout << "2 - Mostrar os K mais positivos" << endl;
+    cout << "3 - Mostrar os K mais negativos" << endl;
+    cout << "4 - Mostrar os K mais frequentes" << endl;
+    cout << "5 - Buscar comentarios associados a uma palavra" << endl;
+    cout << "6 - Buscar palavras por radical" << endl;
+    cout << "7 - Teste a partir de um arquivo" << endl;
+    cout << "0 - Sair" << endl;
+    cout << "==========================" << endl;
+    cout << endl << "Digite sua opcao: ";
+    cin >> opt;
+    cout << endl;
+    switch(opt)
+    {
+        case 0:
+            cout << "Saindo do programa" << endl;
+            exit(EXIT_SUCCESS);
+            break;
+        case 1:
+            // classificar
+            break;
+        case 2:
+            cout << endl <<"Digite o K: ";
+            cin >> k;
+            nPositives(k, &tabela);
+            break;
+        case 3:
+            cout << endl <<"Digite o K: ";
+            cin >> k;
+            nNegatives(k, &tabela);
+            break;
+        case 4:
+            cout << endl <<"Digite o K: ";
+            cin >> k;
+            nFrequency(k, &tabela);
+            break;
+        case 5:
+            cout << endl << "Digite a palavra: ";
+            cin >> palavra;
+            cout << endl << "Digite a polaridade, ou digite 6 para ignorar: ";
+            cin >> k;
+            searchComments(palavra, &tabela, k, fileContent);
+            break;
+        case 6:
+            break;
+        case 7:
+            break;
+        default:
+            break;
+    }
     return EXIT_SUCCESS;
 }
 

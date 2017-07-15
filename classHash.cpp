@@ -158,7 +158,7 @@ HashTable::~HashTable(void)
         if (myWords[i] != NULL)
         {
             delete myWords[i];
-            std::cout <<i+1 << "a posicao desalocada \n";
+            //std::cout <<i+1 << "a posicao desalocada \n";
 
         }
         else

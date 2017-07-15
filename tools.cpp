@@ -1,7 +1,8 @@
 #include "tools.h"
 #include <sstream>
 #include <string>
-
+#include <vector>
+#include <algorithm>
 using namespace std;
 
 vector<string> splitStr(string str) ///Dado um string de entrada, retorna um vector com todas as palavras da string (string.split() implementado na mão)
@@ -18,6 +19,23 @@ vector<string> splitStr(string str) ///Dado um string de entrada, retorna um vec
 
     return palavras;
 }
+struct byFrequency {
+    bool operator()(Word* const a, Word* const b) const {
+        return a->getOcorrencias() > b->getOcorrencias();
+    }
+};
+
+struct byPositives {
+    bool operator()(Word* const a, Word* const b) const {
+        return a->getValor() > b->getValor();
+    }
+};
+
+struct byNegatives {
+    bool operator()(Word* const a, Word* const b) const {
+        return a->getValor() < b->getValor();
+    }
+};
 
 float phraseNote(std::string phrase, HashTable * tabela)
 {
@@ -54,6 +72,7 @@ void nPositives(int n, HashTable * tabela)
             }
         }
     }
+    std::sort(nPosReturn.begin(), nPosReturn.end(), byPositives());
     for(int k = 0; k < (int) nPosReturn.size(); k++)
     {
         cout << nPosReturn[k]->getValor() << "  " << nPosReturn[k]->getString() << endl;
@@ -83,6 +102,7 @@ void nNegatives(int n, HashTable * tabela)
             }
         }
     }
+    std::sort(nPosReturn.begin(), nPosReturn.end(), byNegatives());
     for(int k = 0; k < (int) nPosReturn.size(); k++)
     {
         cout << nPosReturn[k]->getValor() << "  " << nPosReturn[k]->getString() << endl;
@@ -112,6 +132,7 @@ void nFrequency(int n, HashTable * tabela)
             }
         }
     }
+    std::sort(nPosReturn.begin(), nPosReturn.end(), byFrequency());
     for(int k = 0; k < (int) nPosReturn.size(); k++)
     {
         cout << nPosReturn[k]->getString() << " :: Ocorrencias:" << nPosReturn[k]->getOcorrencias() << endl ;
@@ -148,3 +169,5 @@ bool alreadyInside(vector<Word*> wordArray, Word word)
     }
     return false;
 }
+
+
