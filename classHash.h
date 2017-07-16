@@ -4,6 +4,7 @@
 
 class HashTable{
     private:
+        typedef std::vector<Word*> wordVector;
         int tamanho;
         int numItens;
         std::vector<Word*> myWords;
@@ -13,8 +14,9 @@ class HashTable{
         int valorString(std::string str);
         int chaveDivisao(int chave, int tamTabela);
         int sondagemLinear(int pos,int i, int tamTabela);
-        Word ** getWord(std::string palavra,int position);
+        wordVector::iterator getWord(std::string palavra,int position);
         void updateWord(std::string palavra,int position,float value,int ocurrences, int linha);
+        Word getPosition(int position);
 
     public:
         HashTable(int Tam);
@@ -26,6 +28,7 @@ class HashTable{
         float valueWord(std::string palavra);
         std::vector<Word*> getRealItems();
         void showNames();
+        std::vector<Word> fillVector();
         ~HashTable(void);
 };
 

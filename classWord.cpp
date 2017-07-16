@@ -1,5 +1,6 @@
 #include "classHash.h"
 #include <algorithm>
+#include <stdlib.h>
 
 Word::Word(std::string str, int ocurrences, float value, int linha){
         this->palavra = str;

@@ -170,4 +170,77 @@ bool alreadyInside(vector<Word*> wordArray, Word word)
     return false;
 }
 
+void showMenu(){
 
+    cout << endl;
+    cout << "========= MENU ==========" << endl;
+    cout << "1 - Classificar novo comentario" << endl;
+    cout << "2 - Mostrar os K mais positivos" << endl;
+    cout << "3 - Mostrar os K mais negativos" << endl;
+    cout << "4 - Mostrar os K mais frequentes" << endl;
+    cout << "5 - Buscar comentarios associados a uma palavra" << endl;
+    cout << "6 - Buscar palavras por radical" << endl;
+    cout << "7 - Teste a partir de um arquivo" << endl;
+    cout << "8 - Limpar a tela" << endl;
+    cout << "0 - Sair" << endl;
+    cout << "==========================" << endl;
+    cout << endl << "Digite sua opcao: ";
+
+
+}
+
+void quickSort(std::vector<Word> &arr, int left, int right, bool flag)
+{
+    int i = left, j = right;
+    float pivot;
+
+    if (flag)
+    {
+        pivot = arr[(left + right) / 2].getValor();
+    }
+    else
+    {
+        pivot = (float) arr[(left + right) / 2].getOcorrencias();
+    }
+
+    /* partition */
+    while (i <= j)
+    {
+
+        if (flag)
+        {
+            while (arr[i].getValor() < pivot)
+                i++;
+        }
+        else
+        {
+            while ( (float)arr[i].getOcorrencias() < pivot)
+                i++;
+        }
+
+
+
+        if(flag)
+        {
+            while (arr[j].getValor() > pivot)
+                j--;
+        }
+        else
+        {
+            while ((float)arr[j].getOcorrencias() > pivot)
+                j--;
+        }
+        if (i <= j)
+        {
+            std::swap(arr[i],arr[j]);
+            i++;
+            j--;
+        }
+    };
+
+    /* recursion */
+    if (left < j)
+        quickSort(arr, left, j,flag);
+    if (i < right)
+        quickSort(arr, i, right,flag);
+}

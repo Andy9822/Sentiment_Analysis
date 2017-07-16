@@ -11,4 +11,6 @@ void nNegatives(int n, HashTable * tabela);
 void nFrequency(int n, HashTable * tabela);
 void searchComments(std::string palavra, HashTable * tabela, int pontuacao, std::vector<std::string> fileContent);
 bool alreadyInside(std::vector<Word*> wordArray, Word word);
+void showMenu();
+void quickSort(std::vector<Word> &arr, int left, int right, bool flag);
 #endif // TOOLS_H_INCLUDED
