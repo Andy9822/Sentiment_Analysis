@@ -80,7 +80,7 @@ void searchComments(string entrada, HashTable * tabela, int pontuacao, vector<st
     int valor;
     for(std::vector<int>::iterator it = linhas.begin(); it != linhas.end(); ++it)
     {
-        if (pontuacao < 6 && pontuacao >= 0)
+        if (pontuacao < 5 && pontuacao >= 0)
         {
             lineWords = splitStr(fileContent[*it]);
             istringstream  (lineWords[0]) >> valor;

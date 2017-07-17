@@ -122,7 +122,7 @@ int main()
         case 5:
             cout << endl << "Digite a palavra: ";
             cin >> palavra;
-            cout << endl << "Digite a polaridade, ou digite 6 para ignorar: ";
+            cout << endl << "Digite a polaridade, ou digite 5 para ignorar: ";
             cin >> k;
             std::transform(palavra.begin(), palavra.end(), palavra.begin(), ::tolower);
             searchComments(palavra, &tabela, k, fileContent);
