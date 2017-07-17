@@ -28,6 +28,7 @@ class HashTable{
         float valueWord(std::string palavra);
         std::vector<Word*> getRealItems();
         void showNames();
+        std::vector<std::string> radixStrings(std::string radical);
         std::vector<Word> fillVector();
         ~HashTable(void);
 };

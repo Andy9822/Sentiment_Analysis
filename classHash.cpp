@@ -63,21 +63,7 @@ HashTable::wordVector::iterator HashTable::getWord(std::string palavra,int posit
 
     int newPos;
     wordVector::iterator it = myWords.end();
-    /*for (std::vector<Word*>::iterator it = myWords.begin()+position; ; it++)
-    {
-        newPos = sondagemLinear(position,i,getTam());
-        if(myWords[newPos] == NULL )
-        {
-            itWord = &(myWords[newPos]);
-            break;
-        }
-        else if(myWords[newPos]->sameString(palavra) )
-        {
-            ptWord = &(myWords[newPos]);
-            break;
-        }
-        i++;
-    }*/
+
     for(int i =0; i<getTam(); i++)
     {
         newPos = sondagemLinear(position,i,getTam());
@@ -114,8 +100,15 @@ void HashTable::updateWord(std::string str,int position,float value,int ocurrenc
 
 void HashTable::insertWord(std::string nome,float value,int linha)  ///Atualizar� ou criar� um Objeto Word com a string e valor passados
 {
+
     int position = chaveDivisao(valorString(nome),getTam());
     updateWord(nome,position,value,1, linha);
+
+    /*if ((float)getItens() >= ((float) getTam() * 0.75){
+
+
+
+        }*/
 }
 
 float HashTable::valueWord(std::string palavra)  ///Retorna o valor do Objeto Word correspondente � string passada
@@ -132,6 +125,20 @@ float HashTable::valueWord(std::string palavra)  ///Retorna o valor do Objeto Wo
 Word HashTable::getPosition(int position){
     return *(myWords[position]);
 
+}
+
+std::vector<std::string> HashTable::radixStrings(std::string radical){
+    std::vector<std::string> palavrasRadicais;
+    for(int i = 0; i < getTam(); i ++){
+        if(myWords[i]!=NULL) {
+            if(myWords[i]->isRadixWord(radical)){
+                palavrasRadicais.push_back(myWords[i]->getString());
+            }
+        }
+
+    }
+
+    return palavrasRadicais;
 }
 
 std::vector<Word> HashTable::fillVector(){

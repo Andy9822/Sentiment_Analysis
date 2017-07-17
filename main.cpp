@@ -1,16 +1,15 @@
 #include "tools.h"
 #include <algorithm>
 #include <string>
-
+#include <conio.h>
 using namespace std;
 int main()
 {
-    vector<string> lineWords, fileContent, filtering;
+    vector<string> lineWords, fileContent, filtering, palavrasRadicais;
     vector<Word> valuesWords,ocurrencesWords;
-    string line, phrase,palavra,tempString;
+    string line, phrase,palavra,tempString, radical;
     ifstream myfile ("input.txt");
     int index=0, opt, k;
-    char s;
     bool sortedValues = false;
     bool sortedFreq = false;
     HashTable tabela(25);
@@ -38,6 +37,10 @@ int main()
         }
         index++;
     }
+
+    lineWords.clear();
+    filtering.clear();
+
     //for(std::vector<string> :: iterator it = fileContent.begin(); it != fileContent.end(); ++it)
     //    cout << *it <<endl;
 
@@ -56,12 +59,15 @@ int main()
             cin.clear();
             fflush(stdin);
             getline(cin, phrase);
+            cout << endl;
             std::transform(phrase.begin(), phrase.end(), phrase.begin(), ::tolower);
             classify(phrase, &tabela);
+            cout <<endl <<endl<< "Press any key to Continue... ";
+            getch();
             break;
         case 2:
         case 3:
-            cout << endl <<"Digite o K: ";
+            cout  <<"Digite o K: ";
             cin >> k;
             cout << endl;
             if(!sortedValues)
@@ -77,21 +83,25 @@ int main()
 
             if (opt == 2)
             {
+                cout<<k << " palavras com maior valor:"<<endl;
                 for(int i =1 ; i <= k ; i++)
                     cout << valuesWords[(int) valuesWords.size()- i].getString()<<"\t\t" <<valuesWords[(int) valuesWords.size()- i].getValor() << endl;
             }
 
             else
             {
+                cout<<k << " palavras com menor valor:"<<endl;
                 for(int i = 0; i < k; i++)
                     cout << valuesWords[i].getString()<<"\t\t" <<valuesWords[i].getValor() << endl;
             }
+            cout <<endl <<endl<< "Press any key to Continue... ";
+            getch();
             break;
 
         case 4:
-            cout << endl <<"Digite o K: ";
+            cout  <<"Digite o K: ";
             cin >> k;
-            cout << endl;
+            cout << endl <<k << " palavras mais frequentes:"<<endl;
             if(!sortedFreq)
             {
                 if(!sortedValues)
@@ -104,6 +114,9 @@ int main()
             }
             for(int i =1 ; i <= k ; i++)
                 cout << ocurrencesWords[(int) ocurrencesWords.size()- i].getString()<< "\t\t" << ocurrencesWords[(int) ocurrencesWords.size()- i].getOcorrencias() << endl;
+
+            cout <<endl <<endl<< "Press any key to Continue... ";
+            getch();
             break;
 
         case 5:
@@ -113,8 +126,20 @@ int main()
             cin >> k;
             std::transform(palavra.begin(), palavra.end(), palavra.begin(), ::tolower);
             searchComments(palavra, &tabela, k, fileContent);
+            cout <<endl <<endl<< "Press any key to Continue... ";
+            getch();
             break;
         case 6:
+            cout <<"Digite o radical pelo qual quer procurar palavras :  ";
+            cin >> radical;
+            cout <<endl <<"Palavras com radical " <<radical << " :"<<endl<< endl;
+            palavrasRadicais = tabela.radixStrings(radical);
+            for(int i=0; i< (int)palavrasRadicais.size(); i++){
+                cout<< palavrasRadicais[i] << endl;
+            }
+            palavrasRadicais.clear();
+            cout <<endl <<endl<< "Press any key to Continue... ";
+            getch();
             break;
         case 7:
             break;
@@ -128,7 +153,6 @@ int main()
         showMenu();
         cin >> opt;
     }
-    cout <<endl<< "Saindo do programa..." << endl <<"Press any key to exit"<< endl;
-    cin >> s;
+    cout <<endl<< "Saindo do programa..." << endl;
     return EXIT_SUCCESS;
 }

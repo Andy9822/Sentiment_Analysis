@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+
 using namespace std;
 
 vector<string> splitStr(string str) ///Dado um string de entrada, retorna um vector com todas as palavras da string (string.split() implementado na mão)
@@ -152,7 +153,7 @@ vector<string> fillingFilter()
 
 bool alreadyInsideString (vector<string> lista, string palavra)
 {
-    for (int i = 0; i < lista.size(); i++)
+    for (int i = 0; i < (int) lista.size(); i++)
     {
         if(lista[i] == palavra)
             return true;
