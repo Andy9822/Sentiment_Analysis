@@ -19,23 +19,7 @@ vector<string> splitStr(string str) ///Dado um string de entrada, retorna um vec
 
     return palavras;
 }
-struct byFrequency {
-    bool operator()(Word* const a, Word* const b) const {
-        return a->getOcorrencias() > b->getOcorrencias();
-    }
-};
 
-struct byPositives {
-    bool operator()(Word* const a, Word* const b) const {
-        return a->getValor() > b->getValor();
-    }
-};
-
-struct byNegatives {
-    bool operator()(Word* const a, Word* const b) const {
-        return a->getValor() < b->getValor();
-    }
-};
 
 float phraseNote(std::string phrase, HashTable * tabela)
 {
@@ -49,94 +33,41 @@ float phraseNote(std::string phrase, HashTable * tabela)
     return totalValue/(linePhrase.size()-1);
 }
 
-void nPositives(int n, HashTable * tabela)
+void classify(string entrada, HashTable * tabela)
 {
-    vector<Word*> nPos = tabela->getRealItems();
-    vector<Word*> nPosReturn;
-    for(int j = 0; j < (int) nPos.size(); j ++)
+    vector<string> words;
+    words = splitStr(entrada);
+    Word * tempWord;
+    float total;
+    if (!entrada.empty())
     {
-        if (nPos[j] != NULL && (int) nPosReturn.size() < n) {
-            nPosReturn.push_back(nPos[j]);
-        }
-        else {
-            for (int i = 0; i < (int) nPosReturn.size(); i ++)
+        for(int i = 0; i < (int) words.size() -1; i++)
+        {
+            tempWord = tabela->getRealWord(words[i]);
+            if (tempWord != NULL)
             {
-                if (nPos[j] != NULL)
-                {
-                    if (nPosReturn[i]->getValor() < nPos[j]->getValor() && !alreadyInside(nPosReturn, *nPos[j]))
-                    {
-                        nPosReturn.erase (nPosReturn.begin()+i);
-                        nPosReturn.push_back(nPos[j]);
-                    }
-                }
+                total += tempWord->getValor();
+            }
+            else
+            {
+                total += 2;
             }
         }
+        total = total/(words.size()-1);
+        std::cout << "O valor da frase e: " << total <<endl;
+        if (total > 2)
+            std::cout << "A frase e positiva" << endl;
+        else if (total < 2)
+            std::cout << "A frase e negativa" << endl;
+        else
+            std::cout << "A frase e neutra" << endl;
     }
-    std::sort(nPosReturn.begin(), nPosReturn.end(), byPositives());
-    for(int k = 0; k < (int) nPosReturn.size(); k++)
+    else
     {
-        cout << nPosReturn[k]->getValor() << "  " << nPosReturn[k]->getString() << endl;
+        std::cout << "Digite uma frase valida" << endl;
     }
-}
 
-void nNegatives(int n, HashTable * tabela)
-{
-    vector<Word*> nPos = tabela->getRealItems();
-    vector<Word*> nPosReturn;
-    for(int j = 0; j < (int) nPos.size(); j ++)
-    {
-        if (nPos[j] != NULL && (int) nPosReturn.size() < n) {
-            nPosReturn.push_back(nPos[j]);
-        }
-        else {
-            for (int i = 0; i < (int) nPosReturn.size(); i ++)
-            {
-                if (nPos[j] != NULL)
-                {
-                    if (nPosReturn[i]->getValor() > nPos[j]->getValor() && !alreadyInside(nPosReturn, *nPos[j]))
-                    {
-                        nPosReturn.erase (nPosReturn.begin()+i);
-                        nPosReturn.push_back(nPos[j]);
-                    }
-                }
-            }
-        }
-    }
-    std::sort(nPosReturn.begin(), nPosReturn.end(), byNegatives());
-    for(int k = 0; k < (int) nPosReturn.size(); k++)
-    {
-        cout << nPosReturn[k]->getValor() << "  " << nPosReturn[k]->getString() << endl;
-    }
-}
-
-void nFrequency(int n, HashTable * tabela)
-{
-    vector<Word*> nPos = tabela->getRealItems();
-    vector<Word*> nPosReturn;
-    for(int j = 0; j < (int) nPos.size(); j ++)
-    {
-        if (nPos[j] != NULL && (int) nPosReturn.size() < n) {
-            nPosReturn.push_back(nPos[j]);
-        }
-        else {
-            for (int i = 0; i < (int) nPosReturn.size(); i ++)
-            {
-                if (nPos[j] != NULL)
-                {
-                    if (nPosReturn[i]->getOcorrencias() < nPos[j]->getOcorrencias() && !alreadyInside(nPosReturn, *nPos[j]))
-                    {
-                        nPosReturn.erase (nPosReturn.begin()+i);
-                        nPosReturn.push_back(nPos[j]);
-                    }
-                }
-            }
-        }
-    }
-    std::sort(nPosReturn.begin(), nPosReturn.end(), byFrequency());
-    for(int k = 0; k < (int) nPosReturn.size(); k++)
-    {
-        cout << nPosReturn[k]->getString() << " :: Ocorrencias:" << nPosReturn[k]->getOcorrencias() << endl ;
-    }
+    return;
 }
 
 void searchComments(string entrada, HashTable * tabela, int pontuacao, vector<string> fileContent)
@@ -189,6 +120,45 @@ void showMenu(){
 
 }
 
+vector<string> fillingFilter()
+{
+    vector<string> temp;
+    temp.push_back(",");
+    temp.push_back(".");
+    temp.push_back("a");
+    temp.push_back("o");
+    temp.push_back("the");
+    temp.push_back("an");
+    temp.push_back("and");
+    temp.push_back("of");
+    temp.push_back("to");
+    temp.push_back("'s");
+    temp.push_back("is");
+    temp.push_back("that");
+    temp.push_back("in");
+    temp.push_back("it");
+    temp.push_back("an");
+    temp.push_back("as");
+    temp.push_back("this");
+    temp.push_back("for");
+    temp.push_back("but");
+    temp.push_back("its");
+    temp.push_back("n't");
+    temp.push_back("on");
+    temp.push_back("...");
+
+    return temp;
+}
+
+bool alreadyInsideString (vector<string> lista, string palavra)
+{
+    for (int i = 0; i < lista.size(); i++)
+    {
+        if(lista[i] == palavra)
+            return true;
+    }
+    return false;
+}
 void quickSort(std::vector<Word> &arr, int left, int right, bool flag)
 {
     int i = left, j = right;
