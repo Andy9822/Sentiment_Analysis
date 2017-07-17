@@ -1,5 +1,5 @@
 #include "classHash.h"
-
+int ajuda;
 HashTable::HashTable(int tam)
 {
     tamanho = tam;
@@ -35,6 +35,13 @@ int HashTable::setItens(int itens)
     return 0;
 }
 
+void HashTable::resizeTableInfos()
+{
+
+    tamanho = tamanho * 2 + 1;
+    numItens = 0;
+}
+
 ///Methods
 int HashTable::valorString(std::string str) ///Retorna um valor associado a uma string (31 e 7 como valores primos arbitrarios, podendo ser qualquer outro primo)
 {
@@ -68,7 +75,7 @@ HashTable::wordVector::iterator HashTable::getWord(std::string palavra,int posit
     {
         newPos = sondagemLinear(position,i,getTam());
 
-         if(myWords[newPos] == NULL || myWords[newPos]->sameString(palavra) )
+        if(myWords[newPos] == NULL || myWords[newPos]->sameString(palavra) )
         {
             it = myWords.begin()+newPos;
             break;
@@ -78,12 +85,13 @@ HashTable::wordVector::iterator HashTable::getWord(std::string palavra,int posit
     return it;
 }
 
-Word * HashTable::getRealWord(std::string palavra) {
+Word * HashTable::getRealWord(std::string palavra)
+{
     int position = chaveDivisao(valorString(palavra),getTam());
     return *(getWord(palavra, position));
 }
 
-void HashTable::updateWord(std::string str,int position,float value,int ocurrences, int linha)  ///Atualiza o Objeto Word correspondente � string
+void HashTable::updateWord(std::string str,int position,float value,int ocurrences, std::vector<int> linha)  ///Atualiza o Objeto Word correspondente � string
 {
 
     wordVector::iterator it = getWord(str,position);
@@ -100,15 +108,45 @@ void HashTable::updateWord(std::string str,int position,float value,int ocurrenc
 
 void HashTable::insertWord(std::string nome,float value,int linha)  ///Atualizar� ou criar� um Objeto Word com a string e valor passados
 {
+    std::vector<int> linhas;
+    linhas.push_back(linha);
+
 
     int position = chaveDivisao(valorString(nome),getTam());
-    updateWord(nome,position,value,1, linha);
+    updateWord(nome,position,value,1, linhas);
 
-    /*if ((float)getItens() >= ((float) getTam() * 0.75){
+    if( (float)getItens() >= ((float) getTam() * 0.75) )
+    {
+        std::vector<Word*> oldWords = myWords;
+        myWords.clear();
+        //std::cout <<"Estourou com " << getItens() << " itens de " << getTam() << "\n";
+        for (int i = 0; i < getTam() * 2 + 1; i++)
+        {
+            myWords.push_back(NULL);
 
+        }
+        resizeTableInfos();
 
+        /*for(int i = 0; i < (int)oldWords.size();i++){
+                if(oldWords[i]!=NULL)
+                    std::cout <<oldWords[i]->getString() <<"\n";
+        }
+        std::cout <<"Acabei de printar oldWords\n";
+        std::cout <<"Tamanho = "<< getTam()<< "   itens = " <<getItens() << "\nSize myWords "<<myWords.size() << "\n";
+        std::cin >>ajuda;
+        std::cout << "\n";*/
 
-        }*/
+        for(int i = 0; i < (int)oldWords.size(); i++ ){
+                if(oldWords[i]!=NULL)
+                    updateWord(oldWords[i]->getString(),chaveDivisao(valorString(oldWords[i]->getString()),getTam()),oldWords[i]->getValor(),oldWords[i]->getOcorrencias(),oldWords[i]->getLinhas());
+        }
+        oldWords.clear();
+
+       /* std::cout << "Realoquei tabela\n";
+        showNames();
+        std::cin >>ajuda;*/
+
+    }
 }
 
 float HashTable::valueWord(std::string palavra)  ///Retorna o valor do Objeto Word correspondente � string passada
@@ -116,22 +154,28 @@ float HashTable::valueWord(std::string palavra)  ///Retorna o valor do Objeto Wo
     wordVector::iterator it = getWord(palavra,chaveDivisao(valorString(palavra),getTam()));
     if (*it == NULL)
         return 2;
-    else {
+    else
+    {
         float valor = (*it)->getValor();
         return valor;
     }
 }
 
-Word HashTable::getPosition(int position){
+Word HashTable::getPosition(int position)
+{
     return *(myWords[position]);
 
 }
 
-std::vector<std::string> HashTable::radixStrings(std::string radical){
+std::vector<std::string> HashTable::radixStrings(std::string radical)
+{
     std::vector<std::string> palavrasRadicais;
-    for(int i = 0; i < getTam(); i ++){
-        if(myWords[i]!=NULL) {
-            if(myWords[i]->isRadixWord(radical)){
+    for(int i = 0; i < getTam(); i ++)
+    {
+        if(myWords[i]!=NULL)
+        {
+            if(myWords[i]->isRadixWord(radical))
+            {
                 palavrasRadicais.push_back(myWords[i]->getString());
             }
         }
@@ -141,16 +185,20 @@ std::vector<std::string> HashTable::radixStrings(std::string radical){
     return palavrasRadicais;
 }
 
-std::vector<Word> HashTable::fillVector(){
+std::vector<Word> HashTable::fillVector()
+{
     std::vector<Word> valores;
     int copiados = 0;
-    for(int i = 0; i < getTam(); i++){
+    for(int i = 0; i < getTam(); i++)
+    {
 
-        if (myWords[i]!=NULL){
+        if (myWords[i]!=NULL)
+        {
             valores.push_back( *(myWords[i]) );
             copiados++;
 
-            if (copiados == getItens()){
+            if (copiados == getItens())
+            {
                 break;
             }
         }
@@ -188,7 +236,8 @@ void HashTable::showNames()  ///M�todo que mostra toda a tabela Hash
 HashTable::~HashTable(void)
 {
     std::cout << "Vector ... deleting" << std::endl<< std::endl;
-    for (int i = 0; i < tamanho; i++){
+    for (int i = 0; i < tamanho; i++)
+    {
 
         if (myWords[i] != NULL)
         {
