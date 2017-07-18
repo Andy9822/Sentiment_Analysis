@@ -15,8 +15,9 @@ class HashTable{
         int chaveDivisao(int chave, int tamTabela);
         int sondagemLinear(int pos,int i, int tamTabela);
         wordVector::iterator getWord(std::string palavra,int position);
-        void updateWord(std::string palavra,int position,float value,int ocurrences, int linha);
+        void updateWord(std::string palavra,int position,float value,int ocurrences, std::vector<int> linha);
         Word getPosition(int position);
+        void resizeTableInfos();
 
     public:
         HashTable(int Tam);

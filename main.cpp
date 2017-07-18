@@ -12,7 +12,7 @@ int main()
     int index=0, opt, k;
     bool sortedValues = false;
     bool sortedFreq = false;
-    HashTable tabela(25);
+    HashTable tabela(2);
     filtering = fillingFilter();
 
     cout << "Tamanho da Tabela Hash = " <<tabela.getTam() << endl ;
@@ -45,7 +45,7 @@ int main()
     //    cout << *it <<endl;
 
     myfile.close();
-    //tabela.showNames();
+    tabela.showNames();
 
     showMenu();
     cin >> opt;
@@ -122,7 +122,7 @@ int main()
         case 5:
             cout << endl << "Digite a palavra: ";
             cin >> palavra;
-            cout << endl << "Digite a polaridade, ou digite 6 para ignorar: ";
+            cout << endl << "Digite a polaridade, ou digite 5 para ignorar: ";
             cin >> k;
             std::transform(palavra.begin(), palavra.end(), palavra.begin(), ::tolower);
             searchComments(palavra, &tabela, k, fileContent);

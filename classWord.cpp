@@ -2,11 +2,11 @@
 #include <algorithm>
 #include <stdlib.h>
 
-Word::Word(std::string str, int ocurrences, float value, int linha){
+Word::Word(std::string str, int ocurrences, float value, std::vector<int> linha){
         this->palavra = str;
         this->ocorrencias = ocurrences;
         this->valor = value;
-        this->linhas.push_back(linha);
+        this->linhas.insert(linhas.end(),linha.begin(),linha.end());
 }
 
 ///Getters & Setters
@@ -27,12 +27,19 @@ std::string Word::getString(){
 }
 
 ///Methods
-void Word::updateWord(float value, int linha){ ///Recebe um novo valor para a palavra e recalcula o seu valor total fazendo uma média
+void Word::updateWord(float value, std::vector<int> linha){ ///Recebe um novo valor para a palavra e recalcula o seu valor total fazendo uma média
     this->valor = ((this->ocorrencias * this->valor) + value) / (this->ocorrencias + 1 );
     this->ocorrencias += 1;
-    if (!(std::find(this->linhas.begin(), this->linhas.end(), linha) != this->linhas.end())) /// Insere as linhas dos comentários que a palavra está no documento
-        this->linhas.push_back(linha);
-
+    bool problem = false;
+    for (int i = 0; i < (int)linha.size(); i++)
+    {
+        if (!(!(std::find(this->linhas.begin(), this->linhas.end(), linha[i]) != this->linhas.end()))){
+            problem = true;
+        }
+    }
+    if (!problem){
+        this->linhas.insert(linhas.end(),linha.begin(),linha.end());
+    }
 }
 
 bool Word::sameString(std::string str){///Retorna se a string passada equivale à palavra do Objeto Word

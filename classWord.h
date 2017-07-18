@@ -11,12 +11,12 @@ class Word{
 
 
     public:
-        Word(std::string str, int ocurrences, float value, int linha);
+        Word(std::string str, int ocurrences, float value, std::vector<int> linha);
         int getOcorrencias();
         std::vector<int> getLinhas();
         float getValor();
         std::string getString();
-        void updateWord(float value, int linha);
+        void updateWord(float value, std::vector<int> linha);
         bool sameString(std::string palavra);
         bool isRadixWord(std::string radical);
 };
