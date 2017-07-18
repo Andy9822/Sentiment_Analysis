@@ -5,16 +5,18 @@
 using namespace std;
 int main()
 {
-    /*
+
     vector<string> lineWords, fileContent, filtering, palavrasRadicais;
     vector<Word> valuesWords,ocurrencesWords;
     string line, phrase,palavra,tempString, radical;
+     vector<string> terminais;
     ifstream myfile ("input.txt");
     int index=0, opt, k;
     bool sortedValues = false;
     bool sortedFreq = false;
     HashTable tabela(2);
     filtering = fillingFilter();
+    Trie arvore;
 
     cout << "Tamanho da Tabela Hash = " <<tabela.getTam() << endl ;
     if (! myfile.is_open())
@@ -34,6 +36,7 @@ int main()
             if (!alreadyInsideString(filtering, tempString) )
             {
                 tabela.insertWord(tempString,(float) atof(lineWords[0].c_str()), index); /// Insere palavra por palavra do vector na Tabela Hash
+                arvore.insertWord(tempString);
             }
         }
         index++;
@@ -134,11 +137,9 @@ int main()
             cout <<"Digite o radical pelo qual quer procurar palavras :  ";
             cin >> radical;
             cout <<endl <<"Palavras com radical " <<radical << " :"<<endl<< endl;
-            palavrasRadicais = tabela.radixStrings(radical);
-            for(int i=0; i< (int)palavrasRadicais.size(); i++){
-                cout<< palavrasRadicais[i] << endl;
-            }
-            palavrasRadicais.clear();
+            terminais = arvore.radixWords(radical);
+            for(int i = 0; i < (int)terminais.size();i++)
+                cout << terminais[i]<<endl;
             cout <<endl <<endl<< "Press any key to Continue... ";
             getch();
             break;
@@ -155,7 +156,7 @@ int main()
         cin >> opt;
     }
     cout <<endl<< "Saindo do programa..." << endl;
-    return EXIT_SUCCESS;*/
+    return EXIT_SUCCESS;/*
     Trie arvore;
     arvore.insertWord("ba");
     arvore.insertWord("bac");
@@ -168,5 +169,5 @@ int main()
     vector<string> terminais = arvore.radixWords("d");
     cout << "Tamanho dos terminais = " << terminais.size()<<endl;
     for(int i = 0; i < (int)terminais.size();i++)
-    cout << terminais[i]<<endl;
+    cout << terminais[i]<<endl;*/
 }

@@ -125,7 +125,7 @@ vector<string> fillingFilter()
 {
     vector<string> temp;
     temp.push_back(",");
-    temp.push_back(".");
+    /*temp.push_back(".");
     temp.push_back("a");
     temp.push_back("o");
     temp.push_back("the");
@@ -146,7 +146,7 @@ vector<string> fillingFilter()
     temp.push_back("its");
     temp.push_back("n't");
     temp.push_back("on");
-    temp.push_back("...");
+    temp.push_back("...");*/
 
     return temp;
 }

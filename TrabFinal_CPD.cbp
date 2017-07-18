@@ -40,6 +40,8 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="tools.cpp" />
 		<Unit filename="tools.h" />
+		<Unit filename="trie.cpp" />
+		<Unit filename="trie.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
