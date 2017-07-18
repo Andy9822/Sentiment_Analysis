@@ -1,10 +1,11 @@
-#include "tools.h"
+#include "trie.h"
 #include <algorithm>
 #include <string>
 #include <conio.h>
 using namespace std;
 int main()
 {
+    /*
     vector<string> lineWords, fileContent, filtering, palavrasRadicais;
     vector<Word> valuesWords,ocurrencesWords;
     string line, phrase,palavra,tempString, radical;
@@ -154,5 +155,18 @@ int main()
         cin >> opt;
     }
     cout <<endl<< "Saindo do programa..." << endl;
-    return EXIT_SUCCESS;
+    return EXIT_SUCCESS;*/
+    Trie arvore;
+    arvore.insertWord("ba");
+    arvore.insertWord("bac");
+    arvore.insertWord("dado");
+    arvore.insertWord("dacu");
+    cout << arvore.filhos[1]->prefixo << endl;
+    cout << arvore.filhos[1]->filhos[0]->prefixo << endl;
+    cout << arvore.filhos[1]->filhos[0]->filhos[2]->prefixo << endl;
+
+    vector<string> terminais = arvore.radixWords("d");
+    cout << "Tamanho dos terminais = " << terminais.size()<<endl;
+    for(int i = 0; i < (int)terminais.size();i++)
+    cout << terminais[i]<<endl;
 }
