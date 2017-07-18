@@ -1,4 +1,5 @@
 #include "tools.h"
+
 #include <sstream>
 #include <string>
 #include <vector>
@@ -34,13 +35,11 @@ float phraseNote(std::string phrase, HashTable * tabela)
     return totalValue/(linePhrase.size()-1);
 }
 
-void classify(string entrada, HashTable * tabela)
+int classify(vector<string> words, HashTable * tabela, int flag)
 {
-    vector<string> words;
-    words = splitStr(entrada);
     Word * tempWord;
     float total;
-    if (!entrada.empty())
+    if (!words.empty())
     {
         for(int i = 0; i < (int) words.size() -1; i++)
         {
@@ -55,20 +54,26 @@ void classify(string entrada, HashTable * tabela)
             }
         }
         total = total/(words.size()-1);
-        std::cout << "O valor da frase e: " << total <<endl;
-        if (total > 2)
-            std::cout << "A frase e positiva" << endl;
-        else if (total < 2)
-            std::cout << "A frase e negativa" << endl;
-        else
-            std::cout << "A frase e neutra" << endl;
+        if (flag)
+        {
+            std::cout << "O valor da frase e: " << total <<endl;
+            if (total > 2)
+                std::cout << "A frase e positiva" << endl;
+            else if (total < 2)
+                std::cout << "A frase e negativa" << endl;
+            else
+                std::cout << "A frase e neutra" << endl;
+        }
     }
     else
     {
-        std::cout << "Digite uma frase valida" << endl;
+        if (flag)
+        {
+            std::cout << "Digite uma frase valida" << endl;
+        }
     }
 
-    return;
+    return (int) total;
 }
 
 void searchComments(string entrada, HashTable * tabela, int pontuacao, vector<string> fileContent)
