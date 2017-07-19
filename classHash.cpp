@@ -111,7 +111,6 @@ void HashTable::insertWord(std::string nome,float value,int linha)  ///Atualizar
     std::vector<int> linhas;
     linhas.push_back(linha);
 
-
     int position = chaveDivisao(valorString(nome),getTam());
     updateWord(nome,position,value,1, linhas);
 
@@ -242,11 +241,11 @@ HashTable::~HashTable(void)
         if (myWords[i] != NULL)
         {
             delete myWords[i];
-            std::cout <<i+1 << "a posicao desalocada \n";
+           // std::cout <<i+1 << "a posicao desalocada \n";
 
         }
-        else
-            std::cout << "NULL" << std::endl;
+       // else
+            //std::cout << "NULL" << std::endl;
     }
 
     std::cout << std::endl<< "Vector ... deleted" << std::endl;
