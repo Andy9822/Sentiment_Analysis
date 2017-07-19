@@ -1,7 +1,7 @@
 #ifndef TOOLS_H_INCLUDED
 #define TOOLS_H_INCLUDED
 
-#include "classHash.h"
+#include "trie.h"
 
 
 std::vector<std::string> splitStr(std::string str);
@@ -13,4 +13,5 @@ void showMenu();
 std::vector<std::string> fillingFilter();
 bool alreadyInsideString (std::vector<std::string> lista, std::string palavra);
 void quickSort(std::vector<Word> &arr, int left, int right, bool flag);
+void readVocabulary(HashTable *tabela,Trie *arvore,std::vector<std::string>&fileContent);
 #endif // TOOLS_H_INCLUDED

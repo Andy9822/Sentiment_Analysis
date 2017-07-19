@@ -7,6 +7,46 @@
 
 using namespace std;
 
+void readVocabulary(HashTable * tabela, Trie * arvore,std::vector<std::string> &fileContent){
+
+    ifstream myfile ("input.txt");
+    string line, phrase,palavra,tempString;
+    vector<string> lineWords,filtering = fillingFilter();
+    int index=0;
+
+
+    std::cout << "Tamanho da Tabela Hash = " <<tabela->getTam() << endl ;
+    if (! myfile.is_open())
+    {
+        cout << "Unable to open file";
+        exit(EXIT_FAILURE);
+    }
+
+    while ( getline (myfile,line) )
+    {
+        fileContent.push_back(line);
+        lineWords = splitStr(line); /// Separa em um vector cada palavra da linha
+        for(int i = 1; i < (int) lineWords.size() -1; i++)
+        {
+            tempString = lineWords[i];
+            std::transform(tempString.begin(), tempString.end(), tempString.begin(), ::tolower);
+            if (!alreadyInsideString(filtering, tempString) )
+            {
+                tabela->insertWord(tempString,(float) atof(lineWords[0].c_str()), index); /// Insere palavra por palavra do vector na Tabela Hash
+                arvore->insertWord(tempString);
+            }
+        }
+        index++;
+    }
+    lineWords.clear();
+    filtering.clear();
+    tempString.clear();
+    line.clear();
+    myfile.close();
+
+}
+
+
 vector<string> splitStr(string str) ///Dado um string de entrada, retorna um vector com todas as palavras da string (string.split() implementado na mão)
 {
 
@@ -72,7 +112,6 @@ int classify(vector<string> words, HashTable * tabela, int flag)
             std::cout << "Digite uma frase valida" << endl;
         }
     }
-
     return (int) total;
 }
 
