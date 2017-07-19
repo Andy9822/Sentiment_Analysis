@@ -28,3 +28,48 @@
 1499055808 source:c:\users\leona\documents\github\sentiment_analysis\main.cpp
 	"tools.h"
 
+1500493084 source:x:\desktop\sentiment_analysis-flags\classhash.cpp
+	"classHash.h"
+
+1500429199 x:\desktop\sentiment_analysis-flags\classhash.h
+	"classWord.h"
+
+1500429199 x:\desktop\sentiment_analysis-flags\classword.h
+	"imports.h"
+
+1500429199 x:\desktop\sentiment_analysis-flags\imports.h
+	<iostream>
+	<string>
+	<vector>
+	<fstream>
+	<cstdlib>
+	<sstream>
+
+1500429199 source:x:\desktop\sentiment_analysis-flags\classword.cpp
+	"classHash.h"
+	<algorithm>
+	<stdlib.h>
+
+1500493176 source:x:\desktop\sentiment_analysis-flags\main.cpp
+	"tools.h"
+	<algorithm>
+	<string>
+	<conio.h>
+	<fstream>
+
+1500429199 x:\desktop\sentiment_analysis-flags\tools.h
+	"trie.h"
+
+1500486019 x:\desktop\sentiment_analysis-flags\trie.h
+	"classHash.h"
+
+1500492702 source:x:\desktop\sentiment_analysis-flags\tools.cpp
+	"tools.h"
+	<sstream>
+	<string>
+	<vector>
+	<algorithm>
+
+1500487441 source:x:\desktop\sentiment_analysis-flags\trie.cpp
+	"trie.h"
+

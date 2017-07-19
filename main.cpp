@@ -207,4 +207,33 @@ int main()
         cout <<endl<< "Saindo do programa..." << endl;
         return EXIT_SUCCESS;
 
+
+
+
+/*
+    Trie arvore;
+
+    if(arvore.filhos[1]== NULL)
+    {
+        cout << "[b] eh vazio\n";
+    }
+    arvore.insertWord("b");
+
+    if(arvore.filhos[1]->filhos[2]!=NULL)
+        cout<<"Eu sou lenario\n";
+
+
+    arvore.insertWord("bac");
+    arvore.insertWord("bama");
+    arvore.insertWord("bar");
+    arvore.insertWord("dado");
+    arvore.insertWord("dacu");
+    //cout << arvore.filhos[1]->prefixo << endl;
+    //cout << arvore.filhos[1]->filhos[0]->prefixo << endl;
+    //cout << arvore.filhos[1]->filhos[0]->filhos[2]->prefixo << endl;
+
+    vector<string> terminais = arvore.radixWords("bame");
+    cout << "Tamanho dos terminais = " << terminais.size()<<endl;
+    for(int i = 0; i < (int)terminais.size(); i++)
+        cout << terminais[i]<<endl;*/
 }
