@@ -12,13 +12,13 @@ class Word{
 
     public:
         Word(std::string str, int ocurrences, float value, std::vector<int> linha);
-        int getOcorrencias();
-        std::vector<int> getLinhas();
-        float getValor();
-        std::string getString();
-        void updateWord(float value, std::vector<int> linha);
-        bool sameString(std::string palavra);
-        bool isRadixWord(std::string radical);
+        int getOcorrencias(); ///Getter
+        std::vector<int> getLinhas();///Getter
+        float getValor();///Getter
+        std::string getString();///Getter
+        void updateWord(float value, std::vector<int> linha); ///Atualiza os atributos de uma Word
+        bool sameString(std::string palavra); ///Boolean que faz um strcmp
+        bool isRadixWord(std::string radical); ///Boolean que testa se radical é subtstring inicial de string palavra
 };
 
 

@@ -27,7 +27,7 @@ std::string Word::getString(){
 }
 
 ///Methods
-void Word::updateWord(float value, std::vector<int> linha){ ///Recebe um novo valor para a palavra e recalcula o seu valor total fazendo uma média
+void Word::updateWord(float value, std::vector<int> linha){ ///Modifica os atributos da Word com os parametros recebidos
     this->valor = ((this->ocorrencias * this->valor) + value) / (this->ocorrencias + 1 );
     this->ocorrencias += 1;
     bool problem = false;

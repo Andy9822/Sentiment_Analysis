@@ -4,8 +4,52 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <ctime>
 
 using namespace std;
+
+
+bool checkAlpha(string str)
+{
+    for(int i = 0; i < (int)str.size(); i++)
+        if( !isalpha(str[i]))
+            return false;
+    return true;
+}
+
+void readVocabulary(HashTable * tabela, Trie * arvore,std::vector<std::string> &fileContent){ ///leitura e tratamento do input e passar para as ED
+
+    ifstream myfile ("input.txt");
+    string line, phrase,palavra,tempString;
+    vector<string> lineWords,filtering = fillingFilter();
+    int index=0;
+
+    if (! myfile.is_open())
+    {
+        cout << "Unable to open file";
+        exit(EXIT_FAILURE);
+    }
+
+    while ( getline (myfile,line) )
+    {
+        fileContent.push_back(line);
+        lineWords = splitStr(line); /// Separa em um vector cada palavra da linha
+        for(int i = 1; i < (int) lineWords.size() -1; i++)
+        {
+            tempString = lineWords[i];
+            std::transform(tempString.begin(), tempString.end(), tempString.begin(), ::tolower); ///Bota o .txt em lower case
+            if (!alreadyInsideString(filtering, tempString) && checkAlpha(tempString)) ///Elimina palavras stopword e palavras contendo não-somente caracteres letra
+            {
+                tabela->insertWord(tempString,(float) atof(lineWords[0].c_str()), index); /// Insere palavra por palavra na hash e na trie
+                arvore->insertWord(tempString);
+            }
+        }
+        index++;
+    }
+
+    myfile.close();
+}
+
 
 
 vector<string> splitStr(string str) ///Dado um string de entrada, retorna um vector com todas as palavras da string (string.split() implementado na mão)
@@ -23,27 +67,30 @@ vector<string> splitStr(string str) ///Dado um string de entrada, retorna um vec
     return palavras;
 }
 
-int classify(vector<string> words, HashTable * tabela, int flag)
+int classify(vector<string> words, HashTable * tabela, int printarResposta) ///Avaliar as palavras recebidas e retornas sua nota média
 {
     Word * tempWord;
-    float total;
-    int gambiarra=0;
+    float total=0,valor;
+    int desconhecidas=0;
     if (!words.empty())
     {
         for(int i = 0; i < (int) words.size() -1; i++)
         {
-            tempWord = tabela->getRealWord(words[i]);
+            tempWord = tabela->getWordObject(words[i]);
             if (tempWord != NULL)
             {
-                total += tempWord->getValor();
+                valor = tempWord->getValor();
+                total += valor;
             }
             else
             {
-                gambiarra++;
+                desconhecidas++;
             }
         }
-        total = total/(words.size()-1-gambiarra);
-        if (flag)
+        total = total/(words.size()-1-desconhecidas);
+        if (desconhecidas == (int) words.size() - 1)
+            total = 2;
+        if (printarResposta)
         {
             std::cout << "O valor da frase e: " << total <<endl;
             if (total > 2)
@@ -56,22 +103,20 @@ int classify(vector<string> words, HashTable * tabela, int flag)
     }
     else
     {
-        if (flag)
+        if (printarResposta)
         {
-            std::cout << "Digite uma frase valida" << endl;
+            std::cout << "Voce digitou uma frase vazia!" << endl;
         }
     }
-    if (gambiarra == (int) words.size() - 1)
-        total = 2;
-    else
-        total = round(total);
+    total = round(total);
     return (int) total;
 }
 
-void searchComments(string entrada, HashTable * tabela, int pontuacao, vector<string> fileContent)
+void searchComments(string entrada, HashTable * tabela, int pontuacao, vector<string> fileContent)///Procura por comments contendo a palavra passada e opcionalmente a pontuacao
 {
     Word * palavra;
-    palavra = tabela->getRealWord(entrada);
+    palavra = tabela->getWordObject(entrada);
+    if(palavra!=NULL){
     vector<int> linhas = palavra->getLinhas();
     vector<string> lineWords;
     int valor;
@@ -88,18 +133,9 @@ void searchComments(string entrada, HashTable * tabela, int pontuacao, vector<st
             cout << fileContent[*it] << endl;
     }
 }
-
-bool alreadyInside(vector<Word*> wordArray, Word word)
-{
-    for (int i = 0; i < (int) wordArray.size(); i++)
-    {
-        if(wordArray[i]->getValor() == word.getValor() && wordArray[i]->getString() == word.getString())
-            return true;
-    }
-    return false;
 }
 
-void showMenu(){
+void showMenu(){ ///Menu
 
     cout << endl;
     cout << "========= MENU ==========" << endl;
@@ -118,7 +154,7 @@ void showMenu(){
 
 }
 
-vector<string> fillingFilter()
+vector<string> fillingFilter()///Stopwords
 {
     vector<string> temp;
     temp.push_back(",");
@@ -145,7 +181,7 @@ vector<string> fillingFilter()
     temp.push_back("on");
     temp.push_back("...");
     temp.push_back("~");
-    temp.push_back("`");
+    temp.push_back("`");///Getter
     temp.push_back("´");
     temp.push_back(";");
     temp.push_back("'");
@@ -153,7 +189,7 @@ vector<string> fillingFilter()
     return temp;
 }
 
-bool alreadyInsideString (vector<string> lista, string palavra)
+bool alreadyInsideString (vector<string> lista, string palavra) ///Metodo que diz se a palavra esta na lista de palavras
 {
     for (int i = 0; i < (int) lista.size(); i++)
     {
@@ -162,7 +198,7 @@ bool alreadyInsideString (vector<string> lista, string palavra)
     }
     return false;
 }
-void quickSort(std::vector<Word> &arr, int left, int right, bool flag)
+void quickSort(std::vector<Word> &arr, int left, int right, bool flag)///String sort para ordenar as palavras a partir de ser valor ou sua ocorrencia dependendo flag
 {
     int i = left, j = right;
     float pivot;
