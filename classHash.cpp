@@ -208,28 +208,14 @@ std::vector<Word> HashTable::fillVector()
 
 void HashTable::showNames()  ///M�todo que mostra toda a tabela Hash
 {
-
     for(int i = 0; i < getTam(); i++)
     {
-
         if(myWords[i] != NULL)
-        {
-
             std::cout << "palavra  = " << myWords[i]->getString() <<"  valor = " << myWords[i]->getValor() <<"  ocorrencias = " << myWords[i]->getOcorrencias() << std::endl;
-            /*for(int j = 0; j < (int) myWords[i]->getLinhas().size(); j++)
-            {
-                std::cout << myWords[i]->getLinhas()[j] << " ";
-            }
-            std::cout << std::endl;*/
-        }
         else
-        {
-
             std::cout << "NULL"<< std::endl;
-        }
     }
     std::cout << std::endl;
-
 }
 
 HashTable::~HashTable(void)
@@ -237,17 +223,9 @@ HashTable::~HashTable(void)
     std::cout << "Vector ... deleting" << std::endl<< std::endl;
     for (int i = 0; i < tamanho; i++)
     {
-
         if (myWords[i] != NULL)
-        {
             delete myWords[i];
-           // std::cout <<i+1 << "a posicao desalocada \n";
-
-        }
-       // else
-            //std::cout << "NULL" << std::endl;
     }
-
     std::cout << std::endl<< "Vector ... deleted" << std::endl;
     myWords.clear();
 }

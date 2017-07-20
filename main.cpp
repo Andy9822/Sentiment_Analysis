@@ -46,22 +46,17 @@ int main()
                 std::transform(tempString.begin(), tempString.end(), tempString.begin(), ::tolower);
                 if (!alreadyInsideString(filtering, tempString) && checkAlpha(tempString))
                 {
-                    //cout << "O" << tempString << "O" << endl;
                     tabela.insertWord(tempString,(float) atof(lineWords[0].c_str()), index); /// Insere palavra por palavra do vector na Tabela Hash
                     arvore.insertWord(tempString);
                 }
             }
             index++;
         }
-        cout << "Sai daqui";
         lineWords.clear();
         filtering.clear();
         tempString.clear();
         line.clear();
         myfile.close();
-
-
-        //tabela.showNames();
 
         showMenu();
         cin >> opt;
@@ -207,33 +202,4 @@ int main()
         cout <<endl<< "Saindo do programa..." << endl;
         return EXIT_SUCCESS;
 
-
-
-
-/*
-    Trie arvore;
-
-    if(arvore.filhos[1]== NULL)
-    {
-        cout << "[b] eh vazio\n";
-    }
-    arvore.insertWord("b");
-
-    if(arvore.filhos[1]->filhos[2]!=NULL)
-        cout<<"Eu sou lenario\n";
-
-
-    arvore.insertWord("bac");
-    arvore.insertWord("bama");
-    arvore.insertWord("bar");
-    arvore.insertWord("dado");
-    arvore.insertWord("dacu");
-    //cout << arvore.filhos[1]->prefixo << endl;
-    //cout << arvore.filhos[1]->filhos[0]->prefixo << endl;
-    //cout << arvore.filhos[1]->filhos[0]->filhos[2]->prefixo << endl;
-
-    vector<string> terminais = arvore.radixWords("bame");
-    cout << "Tamanho dos terminais = " << terminais.size()<<endl;
-    for(int i = 0; i < (int)terminais.size(); i++)
-        cout << terminais[i]<<endl;*/
 }
