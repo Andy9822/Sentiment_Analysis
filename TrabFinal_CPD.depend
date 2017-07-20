@@ -1,14 +1,14 @@
 # depslib dependency file v1.0
-1499055756 source:c:\users\leona\documents\github\sentiment_analysis\classhash.cpp
+1500511191 source:c:\users\leona\documents\github\sentiment_analysis\classhash.cpp
 	"classHash.h"
 
-1499047538 c:\users\leona\documents\github\sentiment_analysis\classhash.h
+1500511290 c:\users\leona\documents\github\sentiment_analysis\classhash.h
 	"classWord.h"
 
-1499047538 c:\users\leona\documents\github\sentiment_analysis\classword.h
+1500429199 c:\users\leona\documents\github\sentiment_analysis\classword.h
 	"imports.h"
 
-1499047538 c:\users\leona\documents\github\sentiment_analysis\imports.h
+1500429199 c:\users\leona\documents\github\sentiment_analysis\imports.h
 	<iostream>
 	<string>
 	<vector>
@@ -16,17 +16,28 @@
 	<cstdlib>
 	<sstream>
 
-1499047538 source:c:\users\leona\documents\github\sentiment_analysis\classword.cpp
+1500429199 source:c:\users\leona\documents\github\sentiment_analysis\classword.cpp
 	"classHash.h"
+	<algorithm>
+	<stdlib.h>
 
-1499055839 source:c:\users\leona\documents\github\sentiment_analysis\tools.cpp
+1500510436 source:c:\users\leona\documents\github\sentiment_analysis\tools.cpp
 	"tools.h"
+	<math.h>
+	<sstream>
+	<string>
+	<vector>
+	<algorithm>
 
-1499055816 c:\users\leona\documents\github\sentiment_analysis\tools.h
-	"classHash.h"
+1500510439 c:\users\leona\documents\github\sentiment_analysis\tools.h
+	"trie.h"
 
-1499055808 source:c:\users\leona\documents\github\sentiment_analysis\main.cpp
+1500511143 source:c:\users\leona\documents\github\sentiment_analysis\main.cpp
 	"tools.h"
+	<algorithm>
+	<string>
+	<conio.h>
+	<fstream>
 
 1500493084 source:x:\desktop\sentiment_analysis-flags\classhash.cpp
 	"classHash.h"
@@ -71,5 +82,11 @@
 	<algorithm>
 
 1500487441 source:x:\desktop\sentiment_analysis-flags\trie.cpp
+	"trie.h"
+
+1500510258 c:\users\leona\documents\github\sentiment_analysis\trie.h
+	"classHash.h"
+
+1500509036 source:c:\users\leona\documents\github\sentiment_analysis\trie.cpp
 	"trie.h"
 

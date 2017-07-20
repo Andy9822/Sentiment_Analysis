@@ -21,16 +21,16 @@ class HashTable{
 
     public:
         HashTable(int Tam);
-        int getTam();
-        int getItens();
-        int setItens(int itens);
-        void insertWord(std::string nome,float value, int linha);
-        Word * getRealWord(std::string palavra);
-        float valueWord(std::string palavra);
-        std::vector<Word*> getRealItems();
-        void showNames();
+        int getTam();   /// Retorna tamanho
+        int getItens(); /// Retorna o num de items
+        int setItens(int itens);/// Seta o numero de items
+        void insertWord(std::string nome,float value, int linha);   /// Insere uma Word na hash
+        Word * getRealWord(std::string palavra);    /// Dado uma string retorna o objeto Word da tabela
+        float valueWord(std::string palavra);   /// Dado uma palavra retorna sua pontuacao
+        std::vector<Word*> getRealItems();  /// Retorna o vector da tabela hash
+        void showNames();   /// Mostra tudo da hashtable
         std::vector<std::string> radixStrings(std::string radical);
-        std::vector<Word> fillVector();
+        std::vector<Word> fillVector(); /// Preenche o vector
         ~HashTable(void);
 };
 

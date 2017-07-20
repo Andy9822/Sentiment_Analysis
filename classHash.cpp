@@ -118,7 +118,6 @@ void HashTable::insertWord(std::string nome,float value,int linha)  ///Atualizar
     {
         std::vector<Word*> oldWords = myWords;
         myWords.clear();
-        //std::cout <<"Estourou com " << getItens() << " itens de " << getTam() << "\n";
         for (int i = 0; i < getTam() * 2 + 1; i++)
         {
             myWords.push_back(NULL);
@@ -126,25 +125,11 @@ void HashTable::insertWord(std::string nome,float value,int linha)  ///Atualizar
         }
         resizeTableInfos();
 
-        /*for(int i = 0; i < (int)oldWords.size();i++){
-                if(oldWords[i]!=NULL)
-                    std::cout <<oldWords[i]->getString() <<"\n";
-        }
-        std::cout <<"Acabei de printar oldWords\n";
-        std::cout <<"Tamanho = "<< getTam()<< "   itens = " <<getItens() << "\nSize myWords "<<myWords.size() << "\n";
-        std::cin >>ajuda;
-        std::cout << "\n";*/
-
         for(int i = 0; i < (int)oldWords.size(); i++ ){
                 if(oldWords[i]!=NULL)
                     updateWord(oldWords[i]->getString(),chaveDivisao(valorString(oldWords[i]->getString()),getTam()),oldWords[i]->getValor(),oldWords[i]->getOcorrencias(),oldWords[i]->getLinhas());
         }
         oldWords.clear();
-
-       /* std::cout << "Realoquei tabela\n";
-        showNames();
-        std::cin >>ajuda;*/
-
     }
 }
 

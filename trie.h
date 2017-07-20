@@ -24,7 +24,6 @@ public:
     std::vector<std::string> radixWords(std::string str);
     void recursionSearch(Trie* nodo,std::string str,std::vector<std::string> &palavras);
     ~Trie();
-
 };
 
 #endif // TRIE_H_INCLUDED
